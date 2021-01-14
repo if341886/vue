@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/studyvue/js/vue.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+
+    input {
+      width: 30px;
+    }
+
+    tr {
+      height: 40px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="bookList.length">
+      <table border="1" style="width: 700px;border-color: slategrey;">
+        <tr>
+          <td></td>
+          <td>书籍名称 </td>
+          <td>价格</td>
+          <td>出版日期</td>
+          <td>购买数量</td>
+          <td>操作</td>
+        </tr>
+        <tr v-for="(item,index) in bookList" :key="index">
+          <td>{{index + 1}}</td>
+          <td>{{item.bookName}}</td>
+          <td :key="index">{{item.price | showPrice()}}</td>
+          <td>{{item.cbDate}}</td>
+          <td>
+            <input type="button" value="+" @click="plus(index,item.num)" :disabled="item.num ==10">
+            {{item.num}}
+            <input type="button" value="-" @click="less(index,item.num)" :disabled="item.num <= 1">
+          </td>
+          <td>
+            <button @click="rm(index)">移除</button>
+          </td>
+        </tr>
+      </table>
+      <div style="width: 700px;text-align: right;">
+        总价:{{toal | showPrice()}}
+      </div>
+
+    </div>
+    <h2 v-else>购物车为空</h2>
+    <input type="text" :value="message" @input="valChange" style="width: 200px;">
+    <h3>{{message}}</h3>
+  </div>
+
+  <script>
+    const ls = [10, 20, 30]
+    // console.log(ls)
+    let result = ls.filter(n => n > 10).map(n => n * 2).reduce((n, v) => n + v)
+    console.log(result)
+    // let to = ls.filter(function (n) {
+    //   return n > 10
+    // })
+
+    // let to = ls.map(function (n) {
+    //   return n * 100
+    // })
+
+    // let to = ls.reduce(function (v, n) {
+    //   return v + n;
+    // }, 0)
+    // console.log(to)
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "今天的天气真不错",
+        num: 1,
+        bookList: [{
+          bookName: "九阴真经",
+          price: 100,
+          cbDate: "2020-09-26",
+          num: 1
+        }, {
+          bookName: "葵花宝典",
+          price: 200,
+          cbDate: "2020-09-25",
+          num: 1
+
+        }, {
+          bookName: "乾坤大挪移",
+          price: 300,
+          cbDate: "2020-09-24",
+          num: 1
+        }],
+        toaList: [10, 20, 30]
+      },
+      computed: {
+        totalPrice: {
+          get() {
+            let jg = 0;
+            this.bookList.forEach(item => {
+              jg = jg + item.price
+            });
+            return jg;
+          },
+          set(v) {
+            this.totalPrice = this.v
+          }
+        },
+        toal: {
+          get() {
+            return this.bookList.reduce(function (v, n) {
+              console.log(n.num)
+              return v + n.price * n.num
+              // 第一次
+              // 0 + 100 * 1 = 100
+              // 100 + 200 * 1 = 300
+              // 300 + 300 * 1 = 600
+              //600 + 100 * 1 = 700
+              //700 + 200 * 1 = 900
+              //点加
+              //0 + 100 * 2 200
+              // 200 + 200 * 1 400
+              // 400 + 300 * 1 700
+              //减
+
+
+            }, 0)
+          }
+        }
+      },
+      filters: {
+        showPrice(price) {
+          return '$' + price.toFixed(2)
+        }
+      },
+      methods: {
+        rm(index) {
+          this.bookList.splice(index, 1)
+        },
+        plus(index, num) {
+          this.bookList[index].num++;
+          this.totalPrice + this.bookList[index].price
+          // this.totalPrice = this.totalPrice + this.bookList[index].price
+        },
+        less(index, num) {
+          this.bookList[index].num--;
+          //this.totalPrice = this.totalPrice - this.bookList[index].price
+        },
+        ref() {
+          return {
+            reload: this.reload
+          }
+        },
+        valChange(event) {
+          this.message = event.target.value
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

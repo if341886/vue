@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn>
+      <span slot="center">搜索框</span>
+      <span slot="left">查询</span>
+    </cpn>
+  </div>
+
+  <template id="comp">
+    <div>
+      <slot name="left"><span>我是左边</span></slot>
+      <slot name="center"><span>我是中间</span></slot>
+      <slot name="right"><span>我是右边</span></slot>
+    </div>
+
+  </template>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn: {
+          template: '#comp'
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

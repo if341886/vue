@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="vFor">
+    <ui>
+      <li v-for="(item,index) in objArry" :title="item.name">{{item.name}}</li>
+    </ui>
+    <button @click="add" v->添加</button>
+  </div>
+  <div id="app">
+    <h2 v-text="index"></h2>
+    <button @click="lf" v-show="index!=0">上一张</button>
+    <img :src="imgArry[index]" alt="">
+    <button @click="rg" v-show="index<imgArry.length-1">下一张</button>
+  </div>
+  <script>
+    var vFor = new Vue({
+      el: "#vFor",
+      data: {
+        arry: ['我', '操', '你', '吗', 'B'],
+        objArry: [{
+          name: "张三",
+          age: 18
+        }]
+      },
+      methods: {
+        add: function () {
+          this.objArry.push({
+            name: "李四"
+          })
+        }
+      }
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        imgArry: [
+          "./static/image/1.jpg",
+          "./static/image/2.jpg",
+          "./static/image/3.jpg"
+        ],
+        index: 0
+      },
+      methods: {
+        lf: function () {
+          this.index--;
+        },
+        rg: function () {
+          this.index++;
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

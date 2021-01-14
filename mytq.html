@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <div id="app">
+    <input type="text" @keyup.enter="ck" v-model="city">
+    <button id="vt" @onclick="getCity"></button>
+    <div>
+      <a href="#" v-for="item in cityList" v-text="item" @click="getCity(item)"></a>
+    </div>
+
+    <ul>
+      <li v-for="item in weatherList">
+        <div>
+          <span>{{item.type}}</span>
+        </div>
+        <div>
+          <span>{{item.low}}</span>
+        </div>
+        <div>
+          <span>{{item.hegh}}</span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+  <script src=""></script>
+  <script src="./js/main.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+
+</html>

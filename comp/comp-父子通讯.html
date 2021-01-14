@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/studyvue/js/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <cpn :cmsg="msg" :cmsgs="msgs" :darray="message" :propa="cpropa" :propb="cpropb" :prope="obj" :prop-f="vad"></cpn>
+  </div>
+
+  <template id="comp">
+    <div>
+      <li v-for="item in darray">
+        <ul>{{item}}</ul>
+      </li>
+      <h2>{{cmsg}}</h2>
+      <h3>{{cmsgs}}</h3>
+      <h3>{{propa}}</h3>
+      <h3>{{propb}}</h3>
+      <h3>{{prope}}</h3>
+      <h3>{{propF}}</h3>
+    </div>
+  </template>
+
+
+  <!--创建组件-->
+  <script>
+    const cpn = {
+      template: '#comp',
+      // props: ['cmessage']
+      props: {
+        cmessage: Array,
+        cmsgs: String,
+        darray: {
+          type: Array,
+          default: []
+        },
+        cmsg: {
+          type: String,
+          default: 'aaaaaaaaa',
+          requied: true
+        },
+        propa: String,
+        propb: [String, Number],
+        prope: {
+          type: Object,
+          default: function () {
+            return obj
+          }
+        },
+        propF: {
+          validator: function (value) {
+            return value > 10
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        obj: {
+          name: '张三'
+        },
+        message: ['海贼王', '海尔兄弟', '海王'],
+        msg: '我日',
+        msgs: '123456',
+        cpropa: '卧槽',
+        cpropb: 123,
+        cprope: '12344',
+        vad: 12
+      },
+      components: {
+        cpn
+      }
+    })
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn><span>哈哈哈</span></cpn>
+    <cpn><i>哦哦哦哦哦</i></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <span>我的第一个插槽</span>
+      <slot><button>点击我</button></slot>
+    </div>
+  </template>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn: {
+          template: "#cpn"
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

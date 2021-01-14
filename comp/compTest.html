@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="/studyvue/js/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <cop :cnub1="nub1" :cnub2="nub2" @fipnub1="ffipnub1" @fipnub2="ffipnub2" ref="aaa"></cop>
+    <button @click="ckBut">点击我吧</button>
+  </div>
+
+  <template id=comp>
+    <div>
+      <h2>{{dcunb1}}</h2>
+      <h2>{{cnub1}}</h2>
+      <input type="text" v-model="dcunb1">
+      <h2>{{dcunb2}}</h2>
+      <h2>{{cnub2}}</h2>
+      <input type="text" v-model="dcunb2">
+    </div>
+
+  </template>
+
+  <script>
+    var cop = {
+      template: '#comp',
+      props: {
+        cnub1: Number,
+        cnub2: Number
+      },
+      data() {
+        return {
+          dcunb1: this.cnub1,
+          dcunb2: this.cnub2
+        }
+      },
+      watch: {
+        dcunb1(ncub1) {
+          this.dcunb2 = ncub1 * 100
+          this.$emit('fipnub1', this.dcunb2)
+        },
+        dcunb2(ncub2) {
+          this.dcunb1 = ncub2 / 100
+          this.$emit('fipnub1', this.dcunb1)
+        }
+      },
+
+      methods: {
+        showMessage() {
+          console.log('我是子')
+        }
+        // ipnub1(event) {
+        //   this.dcunb1 = event.target.value
+        //   this.$emit('fipnub1', this.dcunb1)
+        //   this.dcunb2 = this.dcunb1 * 100
+        //   this.$emit('fipnub2', this.dcunb2)
+
+        // },
+        // ipnub2(event) {
+        //   this.dcunb2 = event.target.value
+        //   this.$emit('fipnub2', this.dcunb2)
+        //   this.dcunb1 = this.dcunb2 / 100
+        //   this.$emit('fipnub1', this.dcunb1)
+        // }
+      }
+    }
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        nub1: 0,
+        nub2: 0
+      },
+      components: {
+        cop
+      },
+      methods: {
+        ffipnub1(nub1) {
+          this.nub1 = parseInt(nub1)
+        },
+        ffipnub2(nub2) {
+          this.nub2 = parseInt(nub2)
+        },
+        ckBut() {
+          // this.$children[0].showMessage()
+          this.$refs.aaa.showMessage();
+
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

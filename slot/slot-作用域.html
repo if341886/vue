@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn>
+      <template slot-scope="slot">
+        <span>{{slot.abc.join(' - ')}}</span>
+      </template>
+    </cpn>
+  </div>
+
+  <template id="comp">
+    <div>
+      <slot :abc="lList">
+        <ul v-for="item in lList">
+          <li>{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn: {
+          template: '#comp',
+          data() {
+            return {
+              lList: ['王者荣耀', '英雄联盟', '和平精英', '穿越火线']
+            }
+          }
+        }
+      }
+
+    })
+
+  </script>
+
+</body>
+
+</html>

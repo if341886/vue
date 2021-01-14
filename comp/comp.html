@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/studyvue/js/vue.js"></script>
+</head>
+
+
+<body>
+  <script type="text/x-template" id="myComp">
+    <div>
+      <h2>我是标题</h2>
+      <p>哦哦哦</p>
+    </div>
+  </script>
+
+  <template id="comps">
+    <div>
+      <h2>我是标题</h2>
+      <p>嘎嘎嘎</p>
+    </div>
+
+  </template>
+
+  <div id="app">
+    <cop1></cop1>
+    <comp></comp>
+    <mycp></mycp>
+    <comps></comps>
+  </div>
+  <script>
+    //1.创建组件构造器对象
+    const copC = Vue.extend({
+      template: '<div><h2>我是标题,哈哈哈</h2></div>'
+    })
+
+    Vue.component('mycp', {
+      template: '#myComp'
+    })
+
+    Vue.component('comps', {
+      template: '#comps'
+    })
+    const copC1 = Vue.extend({
+      template: '<div><h2>我是标题,呵呵呵呵</h2><cop1></cop1></div>',
+      components: {
+        cop1: copC
+      }
+    })
+
+    Vue.component('comp', {
+      template: '<div><h2>我是标题,嘻嘻嘻</h2></div>'
+    })
+
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cop1: copC1
+      }
+    })
+
+  </script>
+</body>
+
+</html>

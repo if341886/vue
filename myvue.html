@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .imgClass {
+      border: 1px solid red
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="img">
+    <input type="button" value="显示图片" @click="showImg">
+    <input type="button" value="根据年龄显示图片" @click="showAge">
+    <img src="./static/image/1.jpg" alt="" v-show="isShow">
+    <img src="./static/image/2.jpg" alt="" v-if="isShow2">
+    </br>
+    <img :src="imgPath" alt="" :title="title" @click="bindShow" :class="{imgClass:isAct}">
+  </div>
+
+  <script>
+    var img = new Vue({
+      el: "#img",
+      data: {
+        isShow: false,
+        isShow2: false,
+        isAct: false,
+        imgPath: "./static/image/3.jpg",
+        title: "我的vue图片显示"
+      },
+      methods: {
+        showImg: function () {
+          this.isShow = !this.isShow
+        },
+        showAge: function () {
+          this.isShow2 = !this.isShow2
+        },
+        bindShow: function () {
+          this.isAct = !this.isAct
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .line {
+      color: seagreen;
+    }
+
+  </style>
+</head>
+
+<body>
+  <script src="/studyvue/js/vue.js"></script>
+  <div id="app">
+    <h2 :class="{active:isActive,line:isLine}" :style="stFuc()">{{message}}</h2>
+    <input type="button" @click="ckColor" value="点我有惊喜">
+    <ul>
+      <li v-for="(item,index) in nameList">
+        <a href="#" @click="ckName(index)" :class="{'active':index == idx}">{{item}}</a>
+      </li>
+    </ul>
+    <span>{{fullName}}</span>
+    <span>{{totalPrice}}</span>
+    <br>
+    <form action="www.baidu.com">
+      <input type="submit" value="随便点的" @click="dddddd($event)">
+      <input type="button" value="谁便点的1" @click="dddddd(abc)">
+    </form>
+
+    <span v-show="!isActive">我日</span>
+    <span v-if="abc = 123">{{abc}}</span>
+    <span v-else-if="abc = 321">{{abc}}</span>
+
+    <div id="login">
+      <span v-if="userLogin">
+        <label for="name">手机</label>
+        <input type="text" id="name" placeholder="phone" key="name">
+      </span>
+
+      <span v-else>
+        <label for="email">邮箱</label>
+        <input type="text" id="email" placeholder="email" key="email">
+      </span>
+
+      <input type="button" value="切换登录方式" @click="loginUser">
+    </div>
+
+    <ul>
+      <li v-for="(key,value,index) in userData">{{key}}-{{value}}-{{index}}</li>
+    </ul>
+
+    <input type="button" value="push" @click="chsp">
+
+    <input type="button" value="dadadada" @click="ccccc('1','2','3')">
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        abc: "123",
+        message: "中国",
+        isActive: true,
+        loginShow: "手机",
+        isLine: false,
+        finlaSize: '50px',
+        userLogin: true,
+        nameList: ['海贼王', '海尔兄弟', '海王'],
+        idx: 0,
+        userData: {
+          name: "成波",
+          age: 18,
+          height: 174
+        },
+        books: [{
+            bookName: "鬼吹灯",
+            price: 101
+          },
+          {
+            bookName: "盗墓笔记",
+            price: 10102
+          }
+        ]
+      },
+      computed: {
+        fullName() {
+          return "张三" + " - " + "李四"
+        },
+        totalPrice() {
+          let total = 0;
+          for (let book of this.books) {
+            total += book.price
+          }
+          return total
+        }
+      },
+      methods: {
+        ckColor() {
+          this.isLine = !this.isLine
+        },
+        ckName(index) {
+          this.idx = index
+        },
+        stFuc() {
+          return {
+            fontSize: this.finlaSize,
+            backgroundColor: 'red'
+          }
+        },
+        dddddd(evnte) {
+          console.log(evnte);
+        },
+        loginUser(loginShow) {
+          this.userLogin = !this.userLogin
+        },
+        chsp() {
+          let cd = {
+            bookName: "长沙",
+            price: 1234
+          }
+          //this.books.push(cd) 
+          //  this.books.pop()
+          //this.nameList.shift()
+          //  this.nameList.unshift("卧槽")
+          // this.nameList.sort("我丢")
+          this.nameList.splice(3, 0, '傻逼')
+        },
+        ccccc(...aaa) {
+          console.log(aaa);
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/studyvue/js/vue.js"></script>
+  <script src="/studyvue/comp/comp.html"></script>
+</head>
+
+
+<body>
+  <div id="app">
+    <h2>你选择的值是{{hobbos}}</h2>
+    <label v-for="item in ckList" :for="item">
+      <input type="checkbox" v-model.lazy="hobbos" :value="item" :id="item">{{item}}
+    </label>
+    <cpn></cpn>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        hobbos: [],
+        ckList: ["中国", "美国", "俄罗斯", "英国", "日本"]
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

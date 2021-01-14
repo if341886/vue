@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/studyvue/js/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <comp @fck="ooo"></comp>
+  </div>
+
+  <div id="app1">
+    <comp1 @plus="add" @reduce="jj"></comp1>
+    <h2>数字为:{{total}}</h2>
+  </div>
+
+  <template id="cp">
+    <div>
+      <button v-for="item in tatileList" @click="ck(item)">
+        {{item.name}}
+      </button>
+    </div>
+  </template>
+
+  <template id="cp1">
+    <div>
+      <button @click="plus">+</button>
+      <button @click="reduce">-</button>
+    </div>
+  </template>
+
+  <script>
+    const comp1 = {
+      template: '#cp1',
+      data() {
+        return {
+          cont: 0
+        }
+      },
+      methods: {
+        plus() {
+          this.cont++,
+            this.$emit('plus', this.cont)
+        },
+        reduce() {
+          this.cont--,
+            this.$emit('reduce', this.cont)
+        }
+      }
+    }
+
+    const comp = {
+      template: '#cp',
+      data() {
+        return {
+          tatileList: [{
+            id: 1,
+            name: "中国"
+          }, {
+            id: 2,
+            name: "美国"
+          }, {
+            id: 3,
+            name: "俄罗斯"
+          }]
+        }
+      },
+      methods: {
+        ck(item) {
+          this.$emit("fck", item)
+        }
+      }
+    }
+
+    const app1 = new Vue({
+      el: '#app1',
+      data: {
+        total: 0
+      },
+      components: {
+        comp1
+      },
+      methods: {
+        add(cont) {
+          this.total = cont
+        },
+        jj(cont) {
+          this.total = cont
+        }
+      }
+    })
+
+    const app = new Vue({
+      el: "#app",
+      components: {
+        comp
+      },
+      methods: {
+        ooo(item) {
+          console.log(item.name)
+          console.log(item.id)
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

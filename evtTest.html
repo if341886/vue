@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/vue.js"></script>
+
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <input type="button" value="点我啊" @click="d">
+    <input type="text" v-model="message">
+    <h2 v-text="message"></h2>
+    <h1>{{message}}</h1>
+    <!-- <button @click="ck">点我</button>
+    <input type="text" @keyup.enter="ky"> -->
+  </div>
+
+  <script>
+    setTimeout(() => {
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "你我弟兄,辈子弟兄"
+        },
+        methods: {
+          d: function () {
+            this.message = "其他弟兄都是冒充";
+          }
+          // ck: function () {
+          //   alert("点了");
+          // },
+          // ky: function () {
+          //   alert("干嘛");
+          // }
+        }
+      })
+    }, 1000);
+
+  </script>
+</body>
+
+</html>
